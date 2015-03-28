@@ -27,6 +27,13 @@ RUN apt-get install -y logstash && \
 
 ADD etc/supervisor/conf.d/logstash.conf /etc/supervisor/conf.d/logstash.conf
 
+# patch logstash input and server to allow ssl client cert validation
+
+ADD ./patches/input/lumberjack.rb /opt/logstash/lib/logstash/lumberjack.rb
+ADD ./patches/1.9/server.rb /opt/logstash/vendor/bundle/jruby/1.9/gems/jls-lumberjack-0.0.20/lib/server.rb
+ADD ./patches/2.1/server.rb /opt/logstash/vendor/bundle/jruby/2.1/gems/jls-lumberjack-0.0.20/lib/server.rb
+
+
 # Kibana
 RUN \
     curl -s https://download.elasticsearch.org/kibana/kibana/kibana-4.0.0-linux-x64.tar.gz | tar -C /opt -xz && \
