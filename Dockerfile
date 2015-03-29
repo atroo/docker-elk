@@ -19,13 +19,11 @@ RUN \
     sed -i '/#cluster.name:.*/a cluster.name: logstash' /etc/elasticsearch/elasticsearch.yml && \
     sed -i '/#path.data: \/path\/to\/data/a path.data: /data' /etc/elasticsearch/elasticsearch.yml
 
-ADD etc/supervisor/conf.d/elasticsearch.conf /etc/supervisor/conf.d/elasticsearch.conf
 
 # Logstash
 RUN apt-get install -y logstash && \
     apt-get clean
 
-ADD etc/supervisor/conf.d/logstash.conf /etc/supervisor/conf.d/logstash.conf
 
 
 # Kibana
@@ -35,6 +33,8 @@ RUN \
     sed -i 's/port: 5601/port: 80/' /opt/kibana/config/kibana.yml
 
 
+ADD etc/supervisor/conf.d/logstash.conf /etc/supervisor/conf.d/logstash.conf
+ADD etc/supervisor/conf.d/elasticsearch.conf /etc/supervisor/conf.d/elasticsearch.conf
 # patch logstash input and server to allow ssl client cert validation
 
 ADD patches/input/lumberjack.rb /opt/logstash/lib/logstash/inputs/lumberjack.rb
