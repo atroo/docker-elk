@@ -30,8 +30,8 @@ ADD etc/supervisor/conf.d/logstash.conf /etc/supervisor/conf.d/logstash.conf
 
 # Kibana
 RUN \
-    curl -s https://download.elasticsearch.org/kibana/kibana/kibana-4.0.0-linux-x64.tar.gz | tar -C /opt -xz && \
-    ln -s /opt/kibana-4.0.0-linux-x64 /opt/kibana && \
+    curl -s https://download.elasticsearch.org/kibana/kibana/kibana-4.0.1-linux-x64.tar.gz | tar -C /opt -xz && \
+    ln -s /opt/kibana-4.0.1-linux-x64 /opt/kibana && \
     sed -i 's/port: 5601/port: 80/' /opt/kibana/config/kibana.yml
 
 
@@ -41,6 +41,7 @@ ADD patches/input/lumberjack.rb /opt/logstash/lib/logstash/inputs/lumberjack.rb
 ADD patches/1.9/server.rb /opt/logstash/vendor/bundle/jruby/1.9/gems/jls-lumberjack-0.0.20/lib/server.rb
 ADD patches/2.1/server.rb /opt/logstash/vendor/bundle/jruby/2.1/gems/jls-lumberjack-0.0.20/lib/server.rb
 
+ADD kibana-patch/waitForEs.js /opt/kibana/src/lib/waitForEs.js
 
 ADD etc/supervisor/conf.d/kibana.conf /etc/supervisor/conf.d/kibana.conf
 
