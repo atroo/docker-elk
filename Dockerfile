@@ -41,7 +41,6 @@ ADD patches/input/lumberjack.rb /opt/logstash/lib/logstash/inputs/lumberjack.rb
 ADD patches/1.9/server.rb /opt/logstash/vendor/bundle/jruby/1.9/gems/jls-lumberjack-0.0.20/lib/server.rb
 ADD patches/2.1/server.rb /opt/logstash/vendor/bundle/jruby/2.1/gems/jls-lumberjack-0.0.20/lib/server.rb
 
-ADD kibana-patch/waitForEs.js /opt/kibana/src/lib/waitForEs.js
 
 ADD etc/supervisor/conf.d/kibana.conf /etc/supervisor/conf.d/kibana.conf
 
