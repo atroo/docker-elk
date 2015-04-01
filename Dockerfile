@@ -33,16 +33,16 @@ RUN \
     sed -i 's/port: 5601/port: 80/' /opt/kibana/config/kibana.yml
 
 
-ADD etc/supervisor/conf.d/logstash.conf /etc/supervisor/conf.d/logstash.conf
-ADD etc/supervisor/conf.d/elasticsearch.conf /etc/supervisor/conf.d/elasticsearch.conf
+COPY etc/supervisor/conf.d/logstash.conf /etc/supervisor/conf.d/logstash.conf
+COPY etc/supervisor/conf.d/elasticsearch.conf /etc/supervisor/conf.d/elasticsearch.conf
 # patch logstash input and server to allow ssl client cert validation
 
-ADD patches/input/lumberjack.rb /opt/logstash/lib/logstash/inputs/lumberjack.rb
-ADD patches/1.9/server.rb /opt/logstash/vendor/bundle/jruby/1.9/gems/jls-lumberjack-0.0.20/lib/server.rb
-ADD patches/2.1/server.rb /opt/logstash/vendor/bundle/jruby/2.1/gems/jls-lumberjack-0.0.20/lib/server.rb
+COPY patches/input/lumberjack.rb /opt/logstash/lib/logstash/inputs/lumberjack.rb
+COPY patches/1.9/server.rb /opt/logstash/vendor/bundle/jruby/1.9/gems/jls-lumberjack-0.0.20/lib/server.rb
+COPY patches/2.1/server.rb /opt/logstash/vendor/bundle/jruby/2.1/gems/jls-lumberjack-0.0.20/lib/server.rb
 
 
-ADD etc/supervisor/conf.d/kibana.conf /etc/supervisor/conf.d/kibana.conf
+COPY etc/supervisor/conf.d/kibana.conf /etc/supervisor/conf.d/kibana.conf
 
 EXPOSE 80
 
